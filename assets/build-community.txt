@@ -1,0 +1,99 @@
+#!/bin/bash
+
+checkErrs() {
+    if [ "$1" != "0" ]; then
+         exit ${1}
+    fi
+}
+
+SETTINGS="-s ./settings.xml"
+OFFLINE="-o"
+while (( "$#" )); do
+    case $1 in
+        -s|--settings)
+        SETTINGS="-s $2"
+        shift 2
+        ;;
+        --online)
+        OFFLINE=""
+        ONLINE="--online"
+        shift
+        ;;
+        *)
+        shift
+        ;;
+    esac
+done
+
+maven() {
+  project=$1
+  shift
+  mvn clean install -DskipTests=true $SETTINGS $OFFLINE -f sources/community/$project/pom.xml "$@"
+  checkErrs $?
+}
+
+build() {
+  case $1 in
+        bonita-migration)
+          maven bonita-migration -N
+          maven bonita-migration/bonita-migration-distrib
+        ;;
+        bonita-studio)
+          maven bonita-studio/platform -Pmirrored -Dp2MirrorUrl=file://$P2_REPO
+          maven bonita-studio/patched-plugins
+          maven bonita-studio/tests-dependencies
+          mvn clean tycho-eclipserun:eclipse-run -Dtycho.mode=maven -DskipTests=true -Dp2MirrorUrl=file://$P2_REPO -Pgenerate -f sources/community/bonita-studio/bundles/plugins/org.bonitasoft.studio-models/pom.xml $SETTINGS $OFFLINE
+          checkErrs $?
+          maven bonita-studio/bundles -Dp2MirrorUrl=file://$P2_REPO
+          maven bonita-studio/translations -Dp2MirrorUrl=file://$P2_REPO
+          maven bonita-studio/all-in-one -Dp2MirrorUrl=file://$P2_REPO
+        ;;
+        bonita-js-components*)
+          # we do nothing, lib is already built and pushed to repo
+        ;;
+        *)
+          project=$1
+          shift
+          maven $project "$@"
+        ;;
+    esac
+
+}
+
+full_build() {
+  . ./setenv.sh 
+  build bonita-jboss-h2-mbean 
+  build bonita-tomcat-h2-listener 
+  build bonita-tomcat-valve 
+  build bonita-engine -Pjavadoc,package-all
+  build bonita-userfilters 
+  build bonita-connectors 
+  build bonita-connector-alfresco 
+  build bonita-connector-cmis 
+  build bonita-connector-database 
+  build bonita-connector-email 
+  build bonita-connector-googlecalendar 
+  build bonita-connector-googlecalendar-V3 
+  build bonita-connector-jasper 
+  build bonita-connector-ldap 
+  build bonita-connector-salesforce 
+  build bonita-connector-sap 
+  build bonita-connector-scripting 
+  build bonita-connector-sugarcrm 
+  build bonita-connector-talend 
+  build bonita-connector-twitter 
+  build bonita-connector-webservice 
+  build bonita-simulation 
+  build bonita-theme-builder 
+  build bonita-studio-watchdog 
+  build bonita-gwt-tools 
+  build bonita-web 
+  build bonita-portal-js 
+  build bonita-ui-designer 
+  build bonita-distrib -Djboss.zip.parent.folder=$TOOLSDIR -Dtomcat.zip.parent.folder=$TOOLSDIR
+  build image-overlay-plugin 
+  build bonita-studio 
+  build bonita-migration 
+}
+
+(full_build) | tee build_community.log
