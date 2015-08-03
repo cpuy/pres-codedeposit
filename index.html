@@ -82,8 +82,8 @@
 <section>
     <h1>README</h1>
     <img src="assets/RTFM.jpg" style="float: right">
-    <p>C'est notre dossier de fabrication, particulièrement important pour un project open source</p>
-    <p>Fournissez et Maintenez les README</p>
+    <p class="font-80">C'est notre dossier de fabrication, particulièrement important pour un project open source</p>
+    <p class="font-80">Fournissez et Maintenez les README</p>
 </section>
 <section>
     <h1>Connector versioning</h1>
@@ -124,7 +124,46 @@
         <li><i class="fa fa-thumbs-o-up"></i> Studio: load versions from properties file at project root</li>
     </ul>
 </section>
+<section>
+    <h1>bonita-migration</h1>
+    <ul>
+        <li>Beaucoup, beaucoup, beaucoup ... de duplication de fichier.</li>
+        <li>jars bonita pushés sur git.</li>
+        <li>=> Le code source de Bonita est principalement composé de png et de xml ?????</li>
+    </ul>
+</section>
 
+<section>
+    <h1>bonita-security</h1>
+    <ul>
+        <li>Lot's of jar on scm</li>
+        <li>Not buildable with -DskipTests but tests doesn't pass ...</li>
+        <li>Seems to contain dead code, unused modules ?</li>
+    </ul>
+    <ul class="thumb-up">
+        <li>Delete jars on scm</li>
+        <li>Simplify build</li>
+        <li>Clean ?</li>
+    </ul>
+</section>
+
+<section>
+    <h1>npm/bower</h1>
+</section>
+
+<section>
+    <h1>portal-js-sp</h1>
+</section>
+
+<section>
+    <h1>Conclusion</h1>
+    <ul class="thumb-up">
+        <li>Provide READMEs, explain yourself</li>
+        <li>KISS</li>
+        <li>Avoid pushing jars to scm</li>
+        <li>Fix npm/bower versions</li>
+    </ul>
+</section>
 <script src="bower_components/jquery/jquery.min.js"></script>
 <script src="bower_components/keymaster/keymaster.js"></script>
 <script src="bower_components/hammerjs/hammer.min.js"></script>

@@ -1,0 +1,8 @@
+ul.thumb-up li:before {
+    font-family: 'FontAwesome';
+    content: '\f087  '
+}
+
+.font-80 {
+    font-size: 80%;
+}
