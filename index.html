@@ -53,6 +53,7 @@
         <li>READMEs</li>
         <li>connectors versioning</li>
         <li>bonita-migration</li>
+        <li>bonita-security</li>
         <li>npm/bower</li>
         <li>portal-js-sp</li>
     </ul>
@@ -80,7 +81,42 @@
 </section>
 <section>
     <h1>Connector versioning</h1>
-
+    <ul>
+        <li>Connector version != tag</li>
+        <li>Multiple project version in one repo</li>
+        <li>Studio: verbose dependency management</li>
+    </ul>
+    <code>
+        <pre style="font-size: 50%">
+        { "repo": "bonita-connectors", "tag": "bonita-connectors-1.0.0" },
+        { "repo": "bonita-connector-alfresco", "tag": "1.1.4" },
+        { "repo": "bonita-connector-cmis", "tag": "2.0.1" },
+        { "repo": "bonita-connector-database", "tag": "bonita-connector-database-datasource-1.0.12" },
+        { "repo": "bonita-connector-email", "tag": "bonita-connector-email-impl-1.0.14" },
+        { "repo": "bonita-connector-googlecalendar", "tag": "bonita-connector-googlecalendar-2.0.0" },
+        { "repo": "bonita-connector-googlecalendar-V3", "tag": "bonita-connector-google-calendar-v3-1.0.0" },
+        { "repo": "bonita-connector-jasper", "tag": "bonita-connector-jasper-1.0.0" },
+        { "repo": "bonita-connector-ldap", "tag": "bonita-connector-ldap-1.0.0" },
+        { "repo": "bonita-connector-salesforce", "tag": "update_querysobjects_output_name_1.0.14" },
+        { "repo": "bonita-connector-sap", "tag": "jco2-callfunction-update-1.0.3" },
+        { "repo": "bonita-connector-scripting", "tag": "bonita-connector-scripting-1.0.2" },
+        { "repo": "bonita-connector-sugarcrm", "tag": "delete-several-1.0.3" },
+        { "repo": "bonita-connector-talend", "tag": "update-joblauncher-impl-1.0.3" },
+        { "repo": "bonita-connector-twitter", "tag": "1.1.0-pomfixed" },
+        { "repo": "bonita-connector-webservice", "tag": "1.0.12" }
+        </pre>
+    </code>
+    <a href="https://github.com/bonitasoft/bonita-connector-salesforce" style="float: right; font-size: 50%; color: blue">bonita-connector-salesforce >></a>
+</section>
+<section>
+    <h1>Connector versioning</h1>
+    <ul>
+        <li><i class="fa fa-thumbs-o-up"></i> Merge def and impl modules</li>
+        <li><i class="fa fa-thumbs-o-up"></i> Release the whole connector</li>
+        <li><i class="fa fa-thumbs-o-up"></i> Tag same version than released one</li>
+        <li><i class="fa fa-thumbs-o-up"></i> Studio: declare connectors and not operations</li>
+        <li><i class="fa fa-thumbs-o-up"></i> Studio: load versions from properties file at project root</li>
+    </ul>
 </section>
 
 <script src="bower_components/jquery/jquery.min.js"></script>
